@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 const Movie = props => {
   const [movie, setMovie] = useState();
-
+  const { id } = useParams();
+  // above does the same as below to access the dynamic pieces of the URL
   useEffect(() => {
-    const id = Number(props.match.params.id);
-    // const newID = movie.find(i => i.id === Number(props.match.params.id));
+    // const id = Number(props.match.params.id);
+    // above is the way to change a string to number and associate with the ID of the data
     // change ^^^ that line and grab the id from the URL
     // You will NEED to add a dependency array to this effect hook
 
@@ -18,7 +20,7 @@ const Movie = props => {
       .catch(error => {
         console.error(error);
       });
-  }, [props.match.params.id]);
+  }, [id]);
 
   // Uncomment this only when you have moved on to the stretch goals
   // const saveMovie = () => {
