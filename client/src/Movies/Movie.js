@@ -34,7 +34,7 @@ const Movie = props => {
   }
 
   return (
-    <div className="save-wrapper">
+    <div>
       <MovieCard key={movie.id} movie={movie} saveMovie={saveMovie} />
     </div>
   );
