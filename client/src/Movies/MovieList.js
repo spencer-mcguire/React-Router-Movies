@@ -1,37 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import MovieCard from "./MovieCard";
 
-const MovieList = props => {
-  const [movies, setMovies] = useState([])
-  useEffect(() => {
-    const getMovies = () => {
-      axios
-        .get('http://localhost:5000/api/movies')
-        .then(response => {
-          setMovies(response.data);
-        })
-        .catch(error => {
-          console.error('Server Error', error);
-        });
-    }
-    
-    getMovies();
-  }, []);
-  
+const MovieList = ({ movies }) => {
   return (
     <div className="movie-list">
       {movies.map(movie => (
-        <MovieDetails key={movie.id} movie={movie} />
+        <MovieCard key={movie.id} movie={movie} />
       ))}
     </div>
   );
-}
+};
+
+export default MovieList;
+
+/*  Refactored code 
+
+REMOVED FROM MOVIE LISTS
+const [movies, setMovies] = useState([]);
+useEffect(() => {
+  const getMovies = () => {
+    axios
+    .get("http://localhost:5000/api/movies")
+    .then(response => {
+      setMovies(response.data);
+    })
+    .catch(error => {
+      console.error("Server Error", error);
+    });
+  };
+  
+  getMovies();
+}, []);
 
 function MovieDetails({ movie }) {
   const { title, director, metascore, stars } = movie;
   return (
     <div className="movie-card">
-      <h2>{title}</h2>
+      <Link to={`/movies/${movie.id}`}>
+        <h2>{title}</h2>
+      </Link>
       <div className="movie-director">
         Director: <em>{director}</em>
       </div>
@@ -48,5 +55,4 @@ function MovieDetails({ movie }) {
     </div>
   );
 }
-
-export default MovieList;
+*/
